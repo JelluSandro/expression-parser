@@ -1,8 +1,10 @@
 package expression;
 
-public class UnaryMinus extends AbstractUnaryOperation {
-    public UnaryMinus(CommonOperation right) {
-        super(right);
+import expression.generic.TypeGeneric;
+
+public class UnaryMinus<T> extends AbstractUnaryOperation<T> {
+    public UnaryMinus(CommonOperation<T> right, TypeGeneric<T> t) {
+        super(right, t);
     }
 
     @Override
@@ -11,7 +13,7 @@ public class UnaryMinus extends AbstractUnaryOperation {
     }
 
     @Override
-    protected int calculate(int x) {
-        return (-x);
+    protected T calculate(T x) {
+        return t.negate(x);
     }
 }

@@ -1,8 +1,11 @@
 package expression;
 
-public class Add extends AbstractBinaryOperation {
-    public Add (CommonOperation left, CommonOperation right) {
-        super(left, right);
+import expression.generic.GenericTabulator;
+import expression.generic.TypeGeneric;
+
+public class Add<T> extends AbstractBinaryOperation<T> {
+    public Add (CommonOperation<T> left, CommonOperation<T> right, TypeGeneric<T> t) {
+        super(left, right, t);
     }
 
     @Override
@@ -10,14 +13,8 @@ public class Add extends AbstractBinaryOperation {
         return ("+");
     }
 
-    @Override
-    protected int calculate(int x, int y) {
-        return x + y;
-    }
-
-    @Override
-    protected double calculate(double x, double y) {
-        return x + y;
+    protected T calculate(T x, T y) {
+        return t.add(x, y);
     }
 
     @Override

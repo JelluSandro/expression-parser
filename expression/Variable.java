@@ -1,6 +1,6 @@
 package expression;
 
-public class Variable implements CommonOperation {
+public class Variable<T> implements CommonOperation<T> {
     private String var;
 
     public Variable(String var) {
@@ -22,25 +22,13 @@ public class Variable implements CommonOperation {
     }
 
     @Override
-    public int evaluate(int x) {
-        return x;
-    }
-
-    @Override
-    public double evaluate(double x) {
-        return x;
-    }
-
-    @Override
-    public int evaluate(int x, int y, int z) {
+    public T evaluate(T x, T y, T z) {
         if (var.equals("x")) {
             return x;
         } else if (var.equals("y")) {
             return y;
-        } else if (var.equals("z")) {
-            return z;
         }
-        return 0;
+        return z;
     }
 
     @Override

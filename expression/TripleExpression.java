@@ -1,5 +1,7 @@
 package expression;
 
-public interface TripleExpression extends ToMiniString {
-    int evaluate(int x, int y, int z);
+import expression.generic.TypeGeneric;
+
+public interface TripleExpression<T> extends ToMiniString {
+    T evaluate(T x, T y, T z);
 }

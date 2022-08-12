@@ -1,9 +1,13 @@
 package expression;
 
-public class Const implements CommonOperation {
-    private Number con;
-    public Const(Number con) {
+import expression.generic.TypeGeneric;
+
+public class Const<T> implements CommonOperation<T> {
+    private TypeGeneric<T> t;
+    private T con;
+    public Const(T con, TypeGeneric<T> t) {
         this.con = con;
+        this.t = t;
     }
 
     @Override
@@ -21,23 +25,13 @@ public class Const implements CommonOperation {
         return this.toString();
     }
 
-    @Override
-    public int evaluate(int x) {
-        return con.intValue();
-    }
-
-    @Override
-    public double evaluate(double x) {
-        return con.doubleValue();
-    }
-
-    private Number getNumber() {
+    private T getNumber() {
         return con;
     }
 
     @Override
-    public int evaluate(int x, int y, int z) {
-        return con.intValue();
+    public T evaluate(T x, T y, T z) {
+        return t.value(con);
     }
 
     @Override

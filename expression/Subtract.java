@@ -1,8 +1,10 @@
 package expression;
 
-public class Subtract extends AbstractBinaryOperation {
-    public Subtract (CommonOperation left, CommonOperation right) {
-        super(left, right);
+import expression.generic.TypeGeneric;
+
+public class Subtract<T> extends AbstractBinaryOperation<T> {
+    public Subtract (CommonOperation<T> left, CommonOperation<T> right, TypeGeneric<T> t) {
+        super(left, right, t);
     }
     @Override
     protected String getOperator() {
@@ -10,13 +12,8 @@ public class Subtract extends AbstractBinaryOperation {
     }
 
     @Override
-    protected int calculate(int x, int y) {
-        return x - y;
-    }
-
-    @Override
-    protected double calculate(double x, double y) {
-        return x - y;
+    protected T calculate(T x, T y) {
+        return t.subtract(x, y);
     }
 
     protected int getPriority() {

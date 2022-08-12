@@ -5,6 +5,15 @@ public class BaseParser {
     private final CharSource source;
     protected char ch = 0xffff;
 
+    protected void expect(final char c) {
+        nextChar();
+    }
+    protected void expect(final String value) {
+        for (char c : value.toCharArray()) {
+            expect(c);
+        }
+    }
+
     protected BaseParser(final CharSource source) {
         this.source = source;
     }

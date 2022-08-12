@@ -1,8 +1,10 @@
 package expression;
 
-public class Multiply extends AbstractBinaryOperation {
-    public Multiply(CommonOperation left, CommonOperation right) {
-        super(left, right);
+import expression.generic.TypeGeneric;
+
+public class Multiply<T> extends AbstractBinaryOperation<T> {
+    public Multiply(CommonOperation<T> left, CommonOperation<T> right, TypeGeneric<T> t) {
+        super(left, right, t);
     }
 
     @Override
@@ -11,13 +13,8 @@ public class Multiply extends AbstractBinaryOperation {
     }
 
     @Override
-    protected int calculate(int x, int y) {
-        return x * y;
-    }
-
-    @Override
-    protected double calculate(double x, double y) {
-        return x * y;
+    protected T calculate(T x, T y) {
+        return t.multiply(x, y);
     }
 
     protected int getPriority() {

@@ -1,12 +1,16 @@
 package expression;
 
+import expression.generic.TypeGeneric;
+
 import java.util.InputMismatchException;
 import java.util.Objects;
 
-public abstract class AbstractUnaryOperation implements CommonOperation{
-    private final CommonOperation right;
-    public AbstractUnaryOperation(CommonOperation right) {
+public abstract class AbstractUnaryOperation<T> implements CommonOperation<T>{
+    private final CommonOperation<T> right;
+    protected TypeGeneric<T> t;
+    public AbstractUnaryOperation(CommonOperation<T> right, TypeGeneric<T> t) {
         this.right = right;
+        this.t = t;
     }
     protected abstract String getOperator();
     public String toString() {
@@ -14,26 +18,18 @@ public abstract class AbstractUnaryOperation implements CommonOperation{
         t.append("(").append(getOperator()).append(right.toString()).append(")");
         return (t.toString());
     }
-    protected abstract int calculate(int x);
+    protected abstract T calculate(T x);
     @Override
-    public int evaluate(int x) {
-        return calculate(right.evaluate(x));
-    }
-    @Override
-    public double evaluate(double x) {
-        throw new InputMismatchException();
-    }
-    @Override
-    public int evaluate(int x, int y, int z) {
+    public T evaluate(T x, T y, T z) {
         return calculate(right.evaluate(x, y, z));
     }
     @Override
     public boolean equals(final Object obj) {
         return obj instanceof AbstractUnaryOperation
-                && ((AbstractUnaryOperation) obj).getOperator().equals(getOperator())
-                && ((AbstractUnaryOperation) obj).getRight().equals(right);
+                && ((AbstractUnaryOperation<T>) obj).getOperator().equals(getOperator())
+                && ((AbstractUnaryOperation<T>) obj).getRight().equals(right);
     }
-    private CommonOperation getRight() {
+    private CommonOperation<T> getRight() {
         return right;
     }
     @Override

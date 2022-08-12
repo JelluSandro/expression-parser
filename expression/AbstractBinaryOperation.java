@@ -1,12 +1,16 @@
 package expression;
 
+import expression.generic.TypeGeneric;
+
 import java.util.Objects;
 
-public abstract class AbstractBinaryOperation implements CommonOperation{
-    private final CommonOperation left, right;
-    public AbstractBinaryOperation(CommonOperation left, CommonOperation right) {
+public abstract class AbstractBinaryOperation<T> implements CommonOperation<T> {
+    private final CommonOperation<T> left, right;
+    protected final TypeGeneric<T> t;
+    public AbstractBinaryOperation(CommonOperation<T> left, CommonOperation<T> right, TypeGeneric<T> t) {
         this.left = left;
         this.right = right;
+        this.t = t;
     }
 
     protected abstract String getOperator();
@@ -20,33 +24,22 @@ public abstract class AbstractBinaryOperation implements CommonOperation{
     private String getOperatorWhite() {
         return " " + getOperator() + " ";
     }
-    protected abstract int calculate(int x, int y);
 
-    protected abstract double calculate(double x, double y);
+    protected abstract T calculate(T x, T y);
 
     protected abstract int getPriority();
 
     protected abstract boolean getAssociativity();
 
     @Override
-    public int evaluate(int x) {
-        return calculate(left.evaluate(x), right.evaluate(x));
-    }
-
-    @Override
-    public double evaluate(double x) {
-        return calculate(left.evaluate(x), right.evaluate(x));
-    }
-
-    @Override
-    public int evaluate(int x, int y, int z) {
+    public T evaluate(T x, T y, T z) {
         return calculate(left.evaluate(x, y, z), right.evaluate(x, y, z));
     }
 
     @Override
     public boolean equals(final Object obj) {
         if (obj instanceof AbstractBinaryOperation) {
-            AbstractBinaryOperation k = (AbstractBinaryOperation) obj;
+            AbstractBinaryOperation<T> k = (AbstractBinaryOperation<T>) obj;
             return     k.getOperator().equals(getOperator())
                     && k.getLeft().equals(left)
                     && k.getRight().equals(right);
@@ -55,11 +48,11 @@ public abstract class AbstractBinaryOperation implements CommonOperation{
         }
     }
 
-    private CommonOperation getLeft() {
+    private CommonOperation<T> getLeft() {
         return left;
     }
 
-    private CommonOperation getRight() {
+    private CommonOperation<T> getRight() {
         return right;
     }
 

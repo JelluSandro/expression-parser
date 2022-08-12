@@ -1,6 +1,6 @@
 package expression;
 
-public interface CommonOperation extends Expression, TripleExpression, DoubleExpression {
+public interface CommonOperation<T> extends TripleExpression<T> {
     String toString();
     boolean equals(Object x);
     int hashCode();

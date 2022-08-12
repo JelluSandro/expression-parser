@@ -1,8 +1,10 @@
 package expression;
 
-public class Divide extends AbstractBinaryOperation {
-    public Divide(CommonOperation left, CommonOperation right) {
-        super(left, right);
+import expression.generic.TypeGeneric;
+
+public class Divide<T> extends AbstractBinaryOperation<T> {
+    public Divide(CommonOperation<T> left, CommonOperation<T> right, TypeGeneric<T> t) {
+        super(left, right, t);
     }
 
     @Override
@@ -11,13 +13,8 @@ public class Divide extends AbstractBinaryOperation {
     }
 
     @Override
-    protected int calculate(int x, int y) {
-        return x / y;
-    }
-
-    @Override
-    protected double calculate(double x, double y) {
-        return x / y;
+    protected T calculate(T x, T y) {
+        return t.divide(x, y);
     }
 
     protected int getPriority() {
