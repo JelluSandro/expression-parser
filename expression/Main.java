@@ -15,9 +15,11 @@ public class Main {
         for (int i = 0; i <= (x2 - x1); i++) {
             for (int j = 0; j <= (y2 - y1); j++) {
                 for (int k = 0; k <= (z2 - z1); k++) {
-                    System.out.println(tabulate[i][j][k]);
+                    System.out.print(tabulate[i][j][k] + " ");
                 }
+                System.out.println();
             }
+            System.out.println();
         }
     }
 }
